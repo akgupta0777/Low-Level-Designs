@@ -4,7 +4,7 @@ public class DiceService {
     private int minValue,maxValue;
 
     public DiceService(int numberOfDices){
-        this.minValue = 1*numberOfDices;
+        this.minValue = numberOfDices;
         this.maxValue = 6*numberOfDices;
     }
 

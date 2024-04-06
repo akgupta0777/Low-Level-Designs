@@ -8,8 +8,7 @@ public class App {
         int countOfSnakes = sc.nextInt();
 		HashMap<Integer,Snake> snakes = new HashMap<>();
 		HashMap<Integer,Ladder> ladders = new HashMap<>();
-        Queue<Player> players = new LinkedList<>();	
-		// ArrayList<Snake> snakes = new ArrayList<>();
+        Queue<Player> players = new LinkedList<>();
 		for(int i=1;i<=countOfSnakes;++i){
 			int startPos = sc.nextInt();
 			int endPos = sc.nextInt();
@@ -29,11 +28,14 @@ public class App {
             Player player = new Player(name);
             players.offer(player);
         }
+        int boardSize = sc.nextInt();
 
-        GameService snl = new GameService();
+        GameService snl = new GameService(boardSize);
         snl.setSnakes(snakes);
         snl.setLadders(ladders);
         snl.setPlayers(players);
+        snl.setNumberOfDices(2);
+        snl.setContinueUntilAllPlayersLeft(true);
         snl.startGame();
 		sc.close();
     }

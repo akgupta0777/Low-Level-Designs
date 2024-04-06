@@ -82,8 +82,18 @@ public class GameService {
     public void startGame(){
         DiceService dice = new DiceService(numberOfDices);
         while(!isGameCompleted()){
-            int diceValue = dice.rollDice();
+            int diceValue=0;
+            int diceFace=0;
+            int numberOfrolls = 0;
+            do{
+                if(numberOfrolls>=3) break;
+                numberOfrolls++;
+                diceFace = dice.rollDice();
+                diceValue += diceFace;
+            }while(diceValue==6);
+            if(numberOfrolls>=3) diceValue = 0;
             Player currentPlayer = players.poll();
+            if(currentPlayer == null) continue;
             movePlayer(currentPlayer,diceValue);
             if(hasWon(currentPlayer)){
                 System.out.println(currentPlayer.getName()+" wins the game");
