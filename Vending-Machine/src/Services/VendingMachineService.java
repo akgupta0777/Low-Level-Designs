@@ -1,5 +1,7 @@
 package Services;
 
+import Constants.Coins;
+import Constants.Notes;
 import Models.Product;
 import Models.VendingMachine;
 
@@ -19,7 +21,22 @@ public class VendingMachineService {
             System.out.println("Product :" + product.getProductName() + " is unavailable.");
             return ;
         }
-        vendingMachine.setSelectedProduct(product);
+        vendingMachine.selectProduct(product);
+    }
 
+    public void insertCoin(Coins coin){
+        vendingMachine.insertCoin(coin);
+    }
+
+    public void insertNote(Notes note){
+        vendingMachine.insertNote(note);
+    }
+
+    public void dispenseProduct(){
+        vendingMachine.dispenseProduct();
+    }
+
+    public void returnChange(){
+        vendingMachine.returnChange();
     }
 }

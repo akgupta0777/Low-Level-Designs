@@ -1,5 +1,7 @@
 package Models;
 
+import Constants.Coins;
+import Constants.Notes;
 import Interfaces.VendingMachineState;
 
 public class IdleState implements VendingMachineState {
@@ -15,7 +17,27 @@ public class IdleState implements VendingMachineState {
             return ;
         }
         vendingMachine.setSelectedProduct(product);
-        vendingMachine.setCurrentState(readyState);
+        vendingMachine.setCurrentState(vendingMachine.getReadyState());
         System.out.println("Product : "+product.getProductName()+" is selected.");
+    }
+
+    @Override
+    public void insertCoin(Coins coin) {
+        System.out.println("Please select product first.");
+    }
+
+    @Override
+    public void insertNote(Notes note) {
+        System.out.println("Please select product first.");
+    }
+
+    @Override
+    public void dispenseProduct() {
+        System.out.println("Please select product first.");
+    }
+
+    @Override
+    public void returnChange() {
+        System.out.println("Please select product first.");
     }
 }

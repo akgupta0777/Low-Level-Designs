@@ -1,3 +1,5 @@
+import Constants.Coins;
+import Constants.Notes;
 import Models.Product;
 import Services.VendingMachineService;
 
@@ -14,5 +16,20 @@ public class Main {
 
         service.selectProduct(coke);
 
+        service.insertCoin(Coins.QUARTER);
+        service.insertCoin(Coins.QUARTER);
+        service.insertCoin(Coins.QUARTER);
+        service.insertCoin(Coins.QUARTER);
+        service.insertNote(Notes.TWENTY);
+        service.insertNote(Notes.TEN);
+        service.insertNote(Notes.FIVE);
+        service.insertNote(Notes.ONE);
+        service.insertNote(Notes.ONE);
+        service.insertNote(Notes.ONE);
+        service.insertNote(Notes.TWENTY);
+
+        service.dispenseProduct();
+
+        service.returnChange();
     }
 }

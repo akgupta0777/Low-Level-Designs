@@ -16,4 +16,12 @@ public class Inventory {
     public boolean isAvailable(Product product){
         return products.containsKey(product) && products.get(product)>0;
     }
+
+    public void updateQuantity(Product product,int quantity){
+        products.put(product,quantity);
+    }
+
+    public int getQuantity(Product product){
+        return products.get(product);
+    }
 }
