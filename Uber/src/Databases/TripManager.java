@@ -1,5 +1,7 @@
 package Databases;
 
+import Exceptions.CabNotFoundException;
+import Exceptions.InvalidTripException;
 import Exceptions.NoMatchingCabFound;
 import Models.Location;
 import Models.Rider;
@@ -17,8 +19,8 @@ import java.util.stream.Collectors;
 
 public class TripManager {
     HashMap<String,List<Trip>> TripStore = new HashMap<>();
-    private final double MAX_MATCHING_RADIUS = 10;
-    private final CabManager cabManager = new CabManager();
+    private final double MAX_MATCHING_RADIUS = 100;
+    private final CabManager cabManager = CabManager.getInstance();
     private PriceStrategy defaultPriceStrategy = new DefaultPriceStrategy();
     private CabMatchingStrategy defaultCabMatchingStrategy = new DefaultCabMatchingStrategy();
 
@@ -38,4 +40,30 @@ public class TripManager {
         TripStore.get(rider.getId()).add(newTrip);
         matchingCab.setCurrentTrip(newTrip);
     }
+
+    public void endRide(Cab cab){
+        if(cab == null){
+            throw new CabNotFoundException();
+        }
+        Trip trip = cab.getCurrentTrip();
+        if(trip == null){
+            throw new InvalidTripException();
+        }
+        cab.setCurrentTrip(null);
+        trip.end();
+    }
+
+    public List<Trip> getTrips(String id){
+        return TripStore.getOrDefault(id,null);
+    }
+
+    public void setPriceStrategy(PriceStrategy strategy){
+        this.defaultPriceStrategy = strategy;
+    }
+
+    public void setCabMatchingStrategy(CabMatchingStrategy strategy){
+        this.defaultCabMatchingStrategy = strategy;
+    }
+
+
 }

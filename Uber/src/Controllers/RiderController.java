@@ -2,10 +2,13 @@ package Controllers;
 
 import Databases.RiderManager;
 import Databases.TripManager;
+import Models.Trip;
 import Utils.IdGeneration;
 
+import java.util.List;
+
 public class RiderController {
-    private final RiderManager riderManager = new RiderManager();
+    private final RiderManager riderManager = RiderManager.getInstance();
     private TripManager tripManager = new TripManager();
 
     public RiderController(){
@@ -31,5 +34,10 @@ public class RiderController {
     public void book(String id,double x,double y){
         tripManager.book(riderManager.getRider(id),x,y);
         System.out.println("Cab Successfully Booked.");
+    }
+
+    public List<Trip> fetchRideHistory(String id){
+        List<Trip> rideHistory = tripManager.getTrips(id);
+        return rideHistory;
     }
 }

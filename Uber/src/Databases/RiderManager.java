@@ -7,8 +7,22 @@ import Models.Rider;
 import java.util.HashMap;
 
 public class RiderManager {
-    HashMap<String,Rider> RiderStore = new HashMap<>();
+    private final HashMap<String,Rider> RiderStore = new HashMap<>();
+    private static volatile RiderManager instance = null;
 
+    private RiderManager(){}
+
+    // Singleton design pattern for single static instance throughout the app.
+    public static RiderManager getInstance(){
+        if(instance == null){
+            synchronized (RiderManager.class){
+                if(instance == null){
+                    instance = new RiderManager();
+                }
+            }
+        }
+        return instance;
+    }
     public Rider getRider(String id){
         return RiderStore.getOrDefault(id, null);
     }

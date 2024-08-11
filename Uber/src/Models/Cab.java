@@ -39,4 +39,12 @@ public class Cab {
     public void setCurrentTrip(Trip trip){
         this.currentTrip = trip;
     }
+
+    public String getId(){
+        return this.id;
+    }
+
+    public String getDriverName(){
+        return this.driverName;
+    }
 }

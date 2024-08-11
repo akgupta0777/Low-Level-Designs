@@ -11,7 +11,23 @@ import java.util.List;
 import java.util.HashMap;
 
 public class CabManager {
-    HashMap<String,Cab> CabStore = new HashMap<>();
+    private final HashMap<String,Cab> CabStore = new HashMap<>();
+    private static volatile CabManager instance = null;
+    private CabManager(){
+
+    }
+
+    // Singleton pattern for single object creation
+    public static CabManager getInstance(){
+        if(instance == null){
+            synchronized (CabManager.class){
+                if(instance == null){
+                    instance = new CabManager();
+                }
+            }
+        }
+        return instance;
+    }
 
     public Cab getCab(String id){
         Cab cab = CabStore.getOrDefault(id,null);
